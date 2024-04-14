@@ -19,7 +19,7 @@ library(dplyr)
 setwd("C:\\Users\\kossi\\OneDrive - Université Laval\\Application")
 
 #### Read dataset
-ds = read.csv("cms_er_bmi.csv", sep = ";", na.strings = c("."));
+ds = read.csv("cms_er_bmi.csv", sep = ";", na.strings = c("."))
 head(ds)
 summary(ds)
 
@@ -111,9 +111,13 @@ print(CreateTableOne(vars = cov_names, data = dat, includeNA = TRUE), test = FAL
 #Descriptive statistics for covariate variables stratified by treatment 'A'
 print(CreateTableOne(vars = cov_names, strata = "A", data = dat), test = FALSE, smd = TRUE);
 
+#Start here if you use the dat base available on github
+#dat=  read.csv("data_Application.csv", sep = ",", na.strings = c("."))
+
 # Combining 'HR' and 'cbmi' variables
 dat$HR_bmi = paste0("HR=",dat$HR,",cbmi=",dat$cbmi)
 dat$HR_bmi = factor(dat$HR_bmi)
+
 # The sample is obtained by randomly selecting n/2 indices from the range 1 to n and sorting them
 set.seed(43578578)
 n=nrow(dat)
