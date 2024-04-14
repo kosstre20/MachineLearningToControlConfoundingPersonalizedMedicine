@@ -341,75 +341,73 @@ for (n in c(300,1000)){
 }
 
 # ### Load the recorded results
-# setwd("C:\\Users\\kossi\\Dropbox\\RS_hormonotherapie\\Result_TwoTimes\\Study 2")
-# load("TwoTimeStudy2_scenario_complex_1000.Rdata")
+ setwd("C:\\Users\\kossi\\Dropbox\\RS_hormonotherapie\\Result_TwoTimes\\Study 2")
+ load("TwoTimeStudy2_scenario_complex_1000.Rdata")
 # 
 # ### List of model results and their corresponding names
-# models = c("logit", "random", "bayes", "neural", "SVM", "SL")
-# variables_a_imprimer = list(
-#   logit = results.logit,
-#   random = results.random,
-#   bayes = results.bayes,
-#   neural = results.neural,
-#   SVM = results.SVM,
-#   SL = results.SL
-# )
+ models = c("logit", "random", "bayes", "neural", "SVM", "SL")
+ variables_a_imprimer = list(
+   logit = results.logit,
+   random = results.random,
+   bayes = results.bayes,
+   neural = results.neural,
+   SVM = results.SVM,
+   SL = results.SL )
 # 
-# calculate_metrics = function(results, true.psi) {
-#   bias_result = bias(results, true.psi)  # Bias
-#   sigma_result = sig(results)  # Standard Deviation (sigma)
-#   rmse_result = rmse(results, true.psi)  # Root Mean Squared Error (rmse)
-#   ratio_result = rmse_result / rmse(results.logit, true.psi)  # Ratio
-#   Monte_Carlo_SE_Bias= max(sigma_result/sqrt(nrep))
-#   Monte_Carlo_SE_sigma= max(sigma_result/sqrt(2*(nrep-1)))
-#   return(list(bias = bias_result, sigma = sigma_result, rmse = rmse_result, ratio = ratio_result,
-#               SE_Bias=Monte_Carlo_SE_Bias, SE_sigma=Monte_Carlo_SE_sigma))
-# }
+ calculate_metrics = function(results, true.psi) {
+   bias_result = bias(results, true.psi)  # Bias
+   sigma_result = sig(results)  # Standard Deviation (sigma)
+   rmse_result = rmse(results, true.psi)  # Root Mean Squared Error (rmse)
+   ratio_result = rmse_result / rmse(results.logit, true.psi)  # Ratio
+   Monte_Carlo_SE_Bias= max(sigma_result/sqrt(nrep))
+   Monte_Carlo_SE_sigma= max(sigma_result/sqrt(2*(nrep-1)))
+   return(list(bias = bias_result, sigma = sigma_result, rmse = rmse_result, ratio = ratio_result,
+               SE_Bias=Monte_Carlo_SE_Bias, SE_sigma=Monte_Carlo_SE_sigma))
+ }
 # 
-# # Loop through each model's results
-# for (model_name in models) {
-#   model_results = variables_a_imprimer[[model_name]]
-#   metrics = calculate_metrics(model_results, true.psi)
-#   print(paste(model_name, "Bias:", metrics$bias))
-#   print(paste(model_name, "Sigma:", metrics$sigma))
-#   print(paste(model_name, "RMSE:", metrics$rmse))
-#   print(paste(model_name, "Ratio:", metrics$ratio))
-#   print(paste(model_name, "SE_Bias:", metrics$SE_Bias))
-#   print(paste(model_name, "SE_sigma:", metrics$SE_sigma))
-#   cat("\n")
-# }
+ # Loop through each model's results
+ for (model_name in models) {
+   model_results = variables_a_imprimer[[model_name]]
+   metrics = calculate_metrics(model_results, true.psi)
+   print(paste(model_name, "Bias:", metrics$bias))
+   print(paste(model_name, "Sigma:", metrics$sigma))
+   print(paste(model_name, "RMSE:", metrics$rmse))
+   print(paste(model_name, "Ratio:", metrics$ratio))
+   print(paste(model_name, "SE_Bias:", metrics$SE_Bias))
+   print(paste(model_name, "SE_sigma:", metrics$SE_sigma))
+   cat("\n")
+ }
 # 
 # 
-# #RQL
-# load("RQL_TwoTimeStudy2_scenario_complex_1000.Rdata")
+ # For RQL
+ load("RQL_TwoTimeStudy2_scenario_complex_1000.Rdata")
+ 
+ ### List of model results and their corresponding names
+ models = c("RQL")
+ variables_a_imprimer = list(
+   RQL=results.RQL )
 # 
-# ### List of model results and their corresponding names
-# models = c("RQL")
-# variables_a_imprimer = list(
-#   RQL=results.RQL
-# )
-# 
-# calculate_metrics = function(results, true.psi) {
-#   bias_result = bias(results, true.psi)  # Bias
-#   sigma_result = sig(results)  # Standard Deviation (sigma)
-#   rmse_result = rmse(results, true.psi)  # Root Mean Squared Error (rmse)
-#   ratio_result = rmse_result / rmse(results.logit, true.psi)  # Ratio
-#   Monte_Carlo_SE_Bias= max(sigma_result/sqrt(nrep))
-#   Monte_Carlo_SE_sigma= max(sigma_result/sqrt(2*(nrep-1)))
-#   return(list(bias = bias_result, sigma = sigma_result, rmse = rmse_result, ratio = ratio_result,
-#               SE_Bias=Monte_Carlo_SE_Bias, SE_sigma=Monte_Carlo_SE_sigma))
-# }
-# 
-# # Loop through each model's results
-# for (model_name in models) {
-#   model_results = variables_a_imprimer[[model_name]]
-#   metrics = calculate_metrics(model_results, true.psi)
-#   print(paste(model_name, "Bias:", metrics$bias))
-#   print(paste(model_name, "Sigma:", metrics$sigma))
-#   print(paste(model_name, "RMSE:", metrics$rmse))
-#   print(paste(model_name, "Ratio:", metrics$ratio))
-#   print(paste(model_name, "SE_Bias:", metrics$SE_Bias))
-#   print(paste(model_name, "SE_sigma:", metrics$SE_sigma))
-#   cat("\n")
-# }
+ calculate_metrics = function(results, true.psi) {
+   bias_result = bias(results, true.psi)  # Bias
+   sigma_result = sig(results)  # Standard Deviation (sigma)
+   rmse_result = rmse(results, true.psi)  # Root Mean Squared Error (rmse)
+   ratio_result = rmse_result / rmse(results.logit, true.psi)  # Ratio
+   Monte_Carlo_SE_Bias= max(sigma_result/sqrt(nrep))
+   Monte_Carlo_SE_sigma= max(sigma_result/sqrt(2*(nrep-1)))
+   return(list(bias = bias_result, sigma = sigma_result, rmse = rmse_result, ratio = ratio_result,
+               SE_Bias=Monte_Carlo_SE_Bias, SE_sigma=Monte_Carlo_SE_sigma))
+ }
+ 
+ # Loop through each model's results
+ for (model_name in models) {
+   model_results = variables_a_imprimer[[model_name]]
+   metrics = calculate_metrics(model_results, true.psi)
+   print(paste(model_name, "Bias:", metrics$bias))
+   print(paste(model_name, "Sigma:", metrics$sigma))
+   print(paste(model_name, "RMSE:", metrics$rmse))
+   print(paste(model_name, "Ratio:", metrics$ratio))
+   print(paste(model_name, "SE_Bias:", metrics$SE_Bias))
+   print(paste(model_name, "SE_sigma:", metrics$SE_sigma))
+   cat("\n")
+ }
 # 
